@@ -115,7 +115,7 @@ const solutionData: Record<string, Solution> = {
   },
   'plant-equipment': {
     name: 'Plant & Equipment',
-    heroImage: '/vehicles/digger.png',
+    heroImage: '/vehicles/digger.svg',
     headline: 'Every machine. Controlled.',
     subcopy: 'Ruggedized tracking for the construction industry. IP68 waterproof, shock-resistant, and engine-hour monitoring.',
     primaryProductId: 'silent',
