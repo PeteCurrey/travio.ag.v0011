@@ -3,12 +3,12 @@ import Link from 'next/link';
 import './SolutionHook.css';
 
 const vehicles = [
-  { name: 'Car', image: '/vehicles/car.png' },
-  { name: 'Van', image: '/vehicles/van.png' },
-  { name: 'Motorhome', image: '/vehicles/motorhome.png' },
-  { name: 'Motorbike', image: '/vehicles/motorbike.png' },
-  { name: 'Caravan', image: '/vehicles/caravan.png' },
-  { name: 'Plant & Equipment', image: 'https://images.unsplash.com/photo-1586191552066-d52dd1e3af86?q=80&w=1200&auto=format&fit=crop' },
+  { name: 'Car', slug: 'car', image: '/vehicles/car.png' },
+  { name: 'Van', slug: 'van', image: '/vehicles/van.png' },
+  { name: 'Motorhome', slug: 'motorhome', image: '/vehicles/motorhome.png' },
+  { name: 'Motorbike', slug: 'motorbike', image: '/vehicles/motorbike.png' },
+  { name: 'Caravan', slug: 'caravan', image: '/vehicles/caravan.png' },
+  { name: 'Plant & Equipment', slug: 'plant-equipment', image: 'https://images.unsplash.com/photo-1586191552066-d52dd1e3af86?q=80&w=1200&auto=format&fit=crop' },
 ];
 
 const SolutionHook = () => {
@@ -25,7 +25,7 @@ const SolutionHook = () => {
           {vehicles.map((vehicle, index) => (
             <Link 
               key={vehicle.name} 
-              href={`/solutions/${vehicle.name.toLowerCase().replace(/\s+/g, '-')}`}
+              href={`/solutions/${vehicle.slug}`}
               className="vehicle-card reveal in-view"
               style={{ animationDelay: `${index * 0.08}s` }}
             >
