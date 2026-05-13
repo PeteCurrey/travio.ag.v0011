@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import './AdminProducts.css';
 
 const productList = [
-  { id: 1, name: 'CHAVIO PRO 4G', type: 'Hardwired', price: '£129.00', inventory: 142, status: 'ACTIVE' },
-  { id: 2, name: 'CHAVIO ONE', type: 'OBD', price: '£89.00', inventory: 68, status: 'ACTIVE' },
-  { id: 3, name: 'CHAVIO SILENT', type: 'Magnetic', price: '£109.00', inventory: 0, status: 'OUT OF STOCK' },
-  { id: 4, name: 'CHAVIO GUARD', type: 'Thatcham', price: '£199.00', inventory: 24, status: 'ACTIVE' },
-  { id: 5, name: 'CHAVIO FLEET', type: 'Professional', price: '£149.00', inventory: 56, status: 'ACTIVE' },
+  { id: 1, name: 'TRAVIO PRO 4G', type: 'Hardwired', price: '£129.00', inventory: 142, status: 'ACTIVE' },
+  { id: 2, name: 'TRAVIO PLUG 4G', type: 'OBD', price: '£89.00', inventory: 68, status: 'ACTIVE' },
+  { id: 3, name: 'TRAVIO ASSET 4G', type: 'Battery', price: '£109.00', inventory: 0, status: 'OUT OF STOCK' },
+  { id: 4, name: 'TRAVIO GUARD S5', type: 'Thatcham', price: '£199.00', inventory: 24, status: 'ACTIVE' },
+  { id: 5, name: 'TRAVIO LITE 4G', type: 'Hardwired', price: '£69.00', inventory: 56, status: 'ACTIVE' },
 ];
 
 const AdminProducts = () => {
@@ -72,7 +72,7 @@ const AdminProducts = () => {
             <div className="drawer-content">
               <div className="form-group">
                 <label>Title</label>
-                <input type="text" placeholder="e.g. CHAVIO PRO 4G" />
+                <input type="text" placeholder="e.g. TRAVIO PRO 4G" />
               </div>
               <div className="form-group">
                 <label>Description</label>

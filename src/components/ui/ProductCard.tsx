@@ -19,7 +19,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className="image-placeholder" 
           style={{ backgroundImage: `url(${product.image})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }} 
         />
-        {product.badge && <span className={`card-badge ${product.badge.toLowerCase().replace(/\s+/g, '-')}`}>{product.badge}</span>}
+        {product.badge && (
+          <span className={`card-badge ${product.badge.toLowerCase().replace(/\s+/g, '-').replace(/\+/g, '-plus')}`}>
+            {product.badge}
+          </span>
+        )}
         <button className="wishlist-btn">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 000-7.78z" />

@@ -49,7 +49,7 @@
   color: var(--colour-white);
 }
 
-.card-badge.thatcham-s5+ {
+.card-badge.s5-plus-approved {
   background: var(--colour-black);
   color: var(--colour-white);
 }
