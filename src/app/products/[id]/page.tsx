@@ -148,6 +148,50 @@ const ProductDetail = () => {
                 <TechSpecs specs={product.specs} />
               </div>
             )}
+            {activeTab === 'INSTALLATION' && (
+              <div className="tab-install">
+                <h3>Flexible Installation</h3>
+                <p>Choose the option that fits your needs. All Travio devices come with lifetime technical support.</p>
+                <div className="install-grid-pdp">
+                  <div className="install-item">
+                    <h4>Self-Installation</h4>
+                    <p>Standard hardwired or battery terminal installation in under 30 minutes. Step-by-step video guide included.</p>
+                  </div>
+                  <div className="install-item">
+                    <h4>Professional Fitting</h4>
+                    <p>Book our nationwide network of engineers. We come to your home or workplace. Simply select "Professional Installation" at checkout.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="pdp-faq section">
+        <div className="container">
+          <div className="section-header centered">
+            <span className="small-label">Common Questions</span>
+            <h2>Everything you need to know</h2>
+          </div>
+          <div className="faq-accordion">
+            <div className="faq-item">
+              <h4>Will it affect my vehicle battery?</h4>
+              <p>No. In sleep mode, Travio devices draw as little as 25mA — less than a standard dashboard clock. Your battery remains safe even during long periods of storage.</p>
+            </div>
+            <div className="faq-item">
+              <h4>Do I need a subscription?</h4>
+              <p>For real-time tracking, 90-day history, and push alerts, a data plan is required. Basic SMS location checks are available without a subscription on most models.</p>
+            </div>
+            <div className="faq-item">
+              <h4>Is the tracking worldwide?</h4>
+              <p>Yes. Our trackers operate on a global SIM that automatically connects to the strongest network in over 120 countries, including all of Europe and North America.</p>
+            </div>
+            <div className="faq-item">
+              <h4>What happens if it's stolen?</h4>
+              <p>Open the app immediately to see the live location. You can share a temporary tracking link directly with the police. Our recovery rates are among the highest in the industry.</p>
+            </div>
           </div>
         </div>
       </section>

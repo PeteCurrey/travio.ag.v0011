@@ -474,3 +474,66 @@
     width: 100%;
   }
 }
+
+/* Installation Tab */
+.install-grid-pdp {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.install-item {
+  padding: 24px;
+  background: var(--colour-off-white);
+  border-radius: 2px;
+}
+
+.install-item h4 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.install-item p {
+  font-size: 14px;
+  color: var(--colour-mid);
+}
+
+/* FAQ Section */
+.pdp-faq {
+  background: var(--colour-white);
+  border-top: 1px solid var(--colour-subtle);
+}
+
+.faq-accordion {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.faq-item {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--colour-subtle);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-item h4 {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 17px;
+  margin-bottom: 12px;
+  color: var(--colour-black);
+}
+
+.faq-item p {
+  font-size: 15px;
+  color: var(--colour-mid);
+  line-height: 1.6;
+}
