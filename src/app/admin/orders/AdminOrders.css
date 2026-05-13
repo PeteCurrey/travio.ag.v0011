@@ -1,0 +1,127 @@
+.admin-orders-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  background: #E5E7EB;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.filter-tab {
+  padding: 6px 16px;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  color: #4B5563;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.filter-tab.active {
+  background: var(--colour-white);
+  color: var(--colour-black);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.header-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.table-search-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--colour-subtle);
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--colour-off-white);
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--colour-subtle);
+  width: 320px;
+}
+
+.search-input-wrapper input {
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  width: 100%;
+}
+
+.customer-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-cell .name {
+  font-weight: 600;
+  color: var(--colour-black);
+}
+
+.customer-cell .email {
+  font-size: 12px;
+  color: var(--colour-mid);
+}
+
+.fulfillment-pill {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.fulfillment-pill.unfulfilled { background: #F3F4F6; color: #374151; }
+.fulfillment-pill.shipped { background: #DBEAFE; color: #1E40AF; }
+.fulfillment-pill.cancelled { background: #FEE2E2; color: #991B1B; }
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-top: 1px solid var(--colour-subtle);
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--colour-mid);
+}
+
+.table-pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.table-pagination button {
+  padding: 6px 12px;
+  border: 1px solid var(--colour-subtle);
+  background: var(--colour-white);
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.table-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

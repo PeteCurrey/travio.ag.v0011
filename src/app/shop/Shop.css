@@ -1,0 +1,60 @@
+.shop-page {
+  padding-top: 64px; /* Navbar height */
+}
+
+.shop-header {
+  background-color: var(--colour-off-white);
+  padding: 64px 0 48px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--colour-mid);
+  margin-bottom: 24px;
+}
+
+.breadcrumb a {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--colour-black);
+}
+
+.breadcrumb .sep {
+  color: var(--colour-subtle);
+}
+
+.shop-title {
+  font-size: 72px;
+  color: var(--colour-black);
+  margin-bottom: 16px;
+}
+
+.shop-description {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--colour-mid);
+  max-width: 600px;
+}
+
+.shop-main {
+  background: var(--colour-white);
+}
+
+.shop-layout-container {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .shop-title {
+    font-size: 48px;
+  }
+}

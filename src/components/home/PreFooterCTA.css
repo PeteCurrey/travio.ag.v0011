@@ -1,0 +1,84 @@
+.pre-footer-cta {
+  background-color: var(--colour-accent);
+  padding: 96px 0;
+  text-align: center;
+}
+
+.pre-footer-cta .white-text {
+  color: var(--colour-white);
+  font-size: 64px;
+  font-weight: var(--weight-light);
+  margin-bottom: 16px;
+}
+
+.pre-footer-cta .sub-copy {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: var(--weight-extra-light);
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 40px;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.btn-white {
+  background: var(--colour-white);
+  color: var(--colour-accent);
+  height: 48px;
+  padding: 0 28px;
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.btn-white:hover {
+  background: var(--colour-off-white);
+  transform: translateY(-2px);
+}
+
+.trust-row {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  color: var(--colour-white);
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .pre-footer-cta .white-text {
+    font-size: 40px;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-buttons .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  .trust-row {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}

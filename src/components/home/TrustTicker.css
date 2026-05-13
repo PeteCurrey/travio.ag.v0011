@@ -1,0 +1,47 @@
+.trust-ticker {
+  width: 100%;
+  height: 52px;
+  background: var(--colour-accent);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 40s linear infinite;
+  width: fit-content;
+}
+
+.ticker-group {
+  display: flex;
+  align-items: center;
+}
+
+.ticker-item {
+  font-family: var(--font-body);
+  font-weight: var(--weight-light);
+  font-size: 13px;
+  color: var(--colour-white);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stars {
+  color: var(--colour-white);
+  letter-spacing: 0;
+}
+
+.ticker-dot {
+  color: var(--colour-white);
+  opacity: 0.4;
+  font-size: 24px;
+  line-height: 0;
+}

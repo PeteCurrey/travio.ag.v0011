@@ -1,0 +1,112 @@
+.solution-hook {
+  background-color: var(--colour-off-white);
+}
+
+.section-header.centered {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 64px;
+}
+
+.section-header .eyebrow {
+  color: var(--colour-accent);
+  display: block;
+  margin-bottom: 16px;
+  font-weight: var(--weight-light);
+}
+
+.section-header h2 {
+  margin-bottom: 24px;
+  color: var(--colour-black);
+  font-weight: var(--weight-light);
+}
+
+.section-header p {
+  font-size: 17px;
+  color: var(--colour-mid);
+  font-weight: var(--weight-extra-light);
+}
+
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.vehicle-card {
+  position: relative;
+  aspect-ratio: 3/2;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--colour-subtle);
+  transition: border-color 0.2s ease;
+}
+
+.vehicle-card:hover {
+  border-color: var(--colour-black);
+}
+
+.vehicle-card .img-zoom-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.vehicle-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(45, 62, 51, 0.9) 0%, rgba(45, 62, 51, 0.2) 100%);
+  transition: background 0.3s ease;
+}
+
+.vehicle-card:hover .card-overlay {
+  background: linear-gradient(to top, rgba(45, 62, 51, 0.95) 0%, rgba(45, 62, 51, 0.4) 100%);
+}
+
+.card-content {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vehicle-name {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: 32px;
+  color: var(--colour-white);
+  line-height: 1;
+}
+
+.arrow {
+  font-size: 24px;
+  color: var(--colour-white);
+  transition: transform 0.2s ease;
+}
+
+.vehicle-card:hover .arrow {
+  transform: translateX(8px);
+}
+
+@media (max-width: 1024px) {
+  .vehicle-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .vehicle-grid {
+    grid-template-columns: 1fr;
+  }
+}

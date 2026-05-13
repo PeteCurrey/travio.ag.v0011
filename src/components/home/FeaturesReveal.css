@@ -1,0 +1,142 @@
+.features-reveal {
+  background-color: var(--colour-white);
+  min-height: 500vh; /* Based on 5 features at 100vh each */
+}
+
+.features-container {
+  display: flex;
+  gap: 80px;
+  position: relative;
+}
+
+.features-left {
+  width: 40%;
+  position: relative;
+}
+
+.sticky-content {
+  position: sticky;
+  top: 160px;
+  height: auto;
+}
+
+.features-left .eyebrow {
+  color: var(--colour-accent);
+  display: block;
+  margin-bottom: 16px;
+  font-weight: var(--weight-light);
+}
+
+.features-left h2 {
+  margin-bottom: 24px;
+}
+
+.features-left p {
+  font-size: 16px;
+  color: var(--colour-mid);
+  font-weight: var(--weight-extra-light);
+  margin-bottom: 48px;
+  max-width: 320px;
+}
+
+.progress-indicator {
+  position: relative;
+  width: 1px;
+  height: 200px;
+  background: var(--colour-subtle);
+}
+
+.progress-line {
+  width: 100%;
+  height: 100%;
+}
+
+.progress-dot {
+  position: absolute;
+  left: -4px;
+  width: 9px;
+  height: 9px;
+  background: var(--colour-accent);
+  border-radius: 50%;
+  transition: top 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.features-right {
+  width: 60%;
+}
+
+.feature-panel {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0.3;
+  transition: opacity 0.5s ease;
+}
+
+.feature-panel.active {
+  opacity: 1;
+}
+
+.feature-icon {
+  color: var(--colour-black);
+  margin-bottom: 32px;
+}
+
+.feature-title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.feature-description {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--colour-mid);
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.feature-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--colour-subtle);
+  margin-bottom: 32px;
+}
+
+.feature-stat {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: 32px;
+  color: var(--colour-accent);
+}
+
+@media (max-width: 1024px) {
+  .features-reveal {
+    min-height: auto;
+  }
+  
+  .features-container {
+    flex-direction: column;
+    gap: 48px;
+  }
+  
+  .features-left, .features-right {
+    width: 100%;
+  }
+  
+  .sticky-content {
+    position: static;
+  }
+  
+  .feature-panel {
+    height: auto;
+    padding: 64px 0;
+    opacity: 1 !important;
+  }
+  
+  .progress-indicator {
+    display: none;
+  }
+}
