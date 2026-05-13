@@ -8,7 +8,7 @@ const vehicles = [
   { name: 'Motorhome', slug: 'motorhome', image: '/vehicles/motorhome.png' },
   { name: 'Motorbike', slug: 'motorbike', image: '/vehicles/motorbike.png' },
   { name: 'Caravan', slug: 'caravan', image: '/vehicles/caravan.png' },
-  { name: 'Plant & Equipment', slug: 'plant-equipment', image: '/vehicles/digger.svg' },
+  { name: 'Plant & Equipment', slug: 'plant-equipment', image: '/vehicles/digger.jpg' },
 ];
 
 const SolutionHook = () => {
