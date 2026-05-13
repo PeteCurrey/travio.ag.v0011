@@ -8,7 +8,7 @@ const vehicles = [
   { name: 'Motorhome', slug: 'motorhome', image: '/vehicles/motorhome.png' },
   { name: 'Motorbike', slug: 'motorbike', image: '/vehicles/motorbike.png' },
   { name: 'Caravan', slug: 'caravan', image: '/vehicles/caravan.png' },
-  { name: 'Plant & Equipment', slug: 'plant-equipment', image: 'https://images.unsplash.com/photo-1586191552066-d52dd1e3af86?q=80&w=1200&auto=format&fit=crop' },
+  { name: 'Plant & Equipment', slug: 'plant-equipment', image: 'https://images.unsplash.com/photo-1570534298533-9134a643194a?q=80&w=1200&auto=format&fit=crop' },
 ];
 
 const SolutionHook = () => {
