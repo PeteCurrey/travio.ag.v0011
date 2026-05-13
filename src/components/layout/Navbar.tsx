@@ -35,24 +35,24 @@ const Navbar = () => {
             onMouseEnter={() => setActiveMenu('shop')}
             onMouseLeave={() => setActiveMenu(null)}
           >
-            <Link href="/shop" className="nav-link">Shop</Link>
+            <Link href="/products" className="nav-link">Hardware</Link>
             {activeMenu === 'shop' && (
               <div className="mega-menu shop-menu">
                 <div className="mega-menu-content container">
                   <div className="menu-column">
                     <h3>GPS Trackers</h3>
-                    <Link href="/shop/hardwired">Hardwired</Link>
-                    <Link href="/shop/obd">OBD Plug-In</Link>
-                    <Link href="/shop/magnetic">Magnetic Battery</Link>
-                    <Link href="/shop/insurance">Insurance-Approved</Link>
+                    <Link href="/products?category=Hardwired">Hardwired</Link>
+                    <Link href="/products?category=Plug%20&%20Play">Plug & Play</Link>
+                    <Link href="/products?category=Wireless">Wireless Battery</Link>
+                    <Link href="/products?category=Battery%20Terminal">Battery Terminal</Link>
                   </div>
                   <div className="featured-product">
                     <div className="product-card-mini">
-                      <div className="product-image-placeholder" />
+                      <div className="product-image-placeholder" style={{ backgroundImage: 'url(/products/pro-4g.png)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }} />
                       <div className="product-info">
                         <h4>Travio Pro 4G</h4>
                         <p>£129.00</p>
-                        <Link href="/products/pro-4g" className="shop-now">Shop now</Link>
+                        <Link href="/products/pro" className="shop-now">Shop now</Link>
                       </div>
                     </div>
                   </div>
@@ -71,10 +71,15 @@ const Navbar = () => {
               <div className="mega-menu solutions-menu">
                 <div className="mega-menu-content container">
                   <div className="solutions-grid">
-                    {['Car', 'Van', 'Motorhome', 'Motorbike', 'Caravan', 'Plant & Equipment'].map((item) => (
-                      <Link key={item} href={`/solutions/${item.toLowerCase().replace(/\s+/g, '-')}`} className="solution-tile">
+                    {[
+                      { name: 'SME Fleet', path: '/industries/sme' },
+                      { name: 'Enterprise', path: '/industries/enterprise' },
+                      { name: 'Construction', path: '/industries/construction' },
+                      { name: 'Vehicle Tracking', path: '/solutions' }
+                    ].map((item) => (
+                      <Link key={item.name} href={item.path} className="solution-tile">
                         <div className="icon-placeholder" />
-                        <span>{item}</span>
+                        <span>{item.name}</span>
                       </Link>
                     ))}
                   </div>
@@ -83,8 +88,8 @@ const Navbar = () => {
             )}
           </div>
 
+          <Link href="/demo" className="nav-link">Live Demo</Link>
           <Link href="/how-it-works" className="nav-link">How it works</Link>
-          <Link href="/support" className="nav-link">Support</Link>
         </div>
 
         {/* Right: Cart & CTA */}
@@ -97,7 +102,7 @@ const Navbar = () => {
             </svg>
             <span className="cart-badge" />
           </div>
-          <Link href="/shop" className="btn btn-primary nav-cta">
+          <Link href="/products" className="btn btn-primary nav-cta">
             Shop Now
           </Link>
         </div>
