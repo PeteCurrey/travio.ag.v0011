@@ -9,7 +9,7 @@ const shopProducts = products.map(p => ({
   ...p,
   rating: 4.5 + Math.random() * 0.5,
   reviews: Math.floor(Math.random() * 200) + 20,
-  badge: p.id === 'pro-4g' ? 'BEST SELLER' : p.id === 'guard-s5' ? 'S5+ APPROVED' : undefined
+  badge: p.id === 'pro' ? 'BEST SELLER' : p.id === 'one' ? 'MOST POPULAR' : p.id === 'silent' ? 'WIRELESS' : undefined
 }));
 
 const ProductGrid = () => {

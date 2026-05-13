@@ -54,6 +54,16 @@
   color: var(--colour-white);
 }
 
+.card-badge.most-popular {
+  background: var(--colour-accent);
+  color: var(--colour-white);
+}
+
+.card-badge.wireless {
+  background: var(--colour-charcoal);
+  color: var(--colour-white);
+}
+
 .card-badge.new {
   background: var(--colour-white);
   border: 1px solid var(--colour-accent);

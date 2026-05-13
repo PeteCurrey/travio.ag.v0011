@@ -58,7 +58,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         <div className="card-price-row">
           <span className="main-price">£{product.price}.00</span>
-          <span className="sub-text">+ from £3.99/mo</span>
+          <span className="sub-text">+ from {product.subscriptionFrom}</span>
         </div>
       </div>
     </div>

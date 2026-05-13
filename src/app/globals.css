@@ -6,8 +6,9 @@
   --colour-charcoal: #2A2A2A;
   --colour-mid: #8C8C85;
   --colour-subtle: #E8E8E1;
-  --colour-accent: #2D3E33; /* Matt Green */
-  --colour-accent-dk: #1D2A22;
+  --colour-accent: #2D5A27; /* Travio Forest Green */
+  --colour-accent-dk: #1E3D1A;
+  --colour-accent-lt: #4A7A43;
 
   /* Typography */
   --font-display: var(--font-barlow-condensed), sans-serif;

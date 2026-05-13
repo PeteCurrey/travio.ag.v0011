@@ -62,7 +62,7 @@ const ProductDetail = () => {
 
             <div className="pdp-price-block">
               <span className="main-price">£{product.price}.00</span>
-              <p className="price-meta">One-time payment · Subscription from £3.99/mo · VAT included</p>
+              <p className="price-meta">One-time payment · Subscription from {product.subscriptionFrom} · VAT included</p>
             </div>
 
             <div className="pdp-divider" />
