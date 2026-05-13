@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Navigation, Shield, Battery, Signal, MapPin } from 'lucide-react';
+import { Navigation, Shield, Battery, Signal, MapPin, Clock } from 'lucide-react';
 
 const LiveTrackingMap = () => {
   const [vehicles, setVehicles] = useState([

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Tool, Check } from 'lucide-react';
+import { MapPin, Wrench, Check } from 'lucide-react';
 
 const InstallationNetwork = () => {
   const regions = [
