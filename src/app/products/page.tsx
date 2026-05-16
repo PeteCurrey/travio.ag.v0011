@@ -8,41 +8,36 @@ import Image from 'next/image';
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [compareList, setCompareList] = useState<Product[]>([]);
 
-  const categories = ['All', ...Array.from(new Set(products.map(p => p.category)))];
+  const categories = ['All', 'Hardwired', 'Wireless', 'Battery Terminal', 'Plug & Play'];
 
   const filteredProducts = products.filter(p => 
     selectedCategory === 'All' ? true : p.category === selectedCategory
-  );
-
-  const toggleCompare = (product: Product) => {
-    if (compareList.find(p => p.id === product.id)) {
-      setCompareList(compareList.filter(p => p.id !== product.id));
-    } else if (compareList.length < 3) {
-      setCompareList([...compareList, product]);
-    }
-  };
+  ).filter(p => ['one', 'pro', 'silent', 'volt', 'plug'].includes(p.id)); // Limit to core trackers for now
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white pt-32 pb-24">
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-white/10 pb-8">
-          <div>
-            <h1 className="text-4xl md:text-5xl font-light mb-4">Hardware Ecosystem</h1>
-            <p className="text-white/60 max-w-2xl text-lg">
-              Enterprise-grade tracking devices, AI dash cams, and intelligent sensors designed for total asset visibility.
+    <div className="min-h-screen bg-white text-travio-black pt-32 pb-24">
+      <div className="container">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 pb-8 border-b border-travio-subtle">
+          <div className="animate-fade-up">
+            <nav className="flex items-center gap-2 text-[12px] font-body text-travio-mid uppercase tracking-wider mb-6">
+              <Link href="/" className="hover:text-travio-black transition-colors">Home</Link>
+              <span>/</span>
+              <span className="text-travio-black">Hardware</span>
+            </nav>
+            <h1 className="text-5xl md:text-7xl font-display font-black mb-4 uppercase leading-[0.9]">Hardware Ecosystem</h1>
+            <p className="text-travio-mid max-w-2xl text-[17px] font-body">
+              Enterprise-grade tracking devices designed for total asset visibility and recovery.
             </p>
           </div>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-12">
-          {/* Advanced Filtering Sidebar */}
-          <aside className="w-full lg:w-64 flex-shrink-0">
-            <div className="sticky top-32 space-y-8">
+          {/* Filtering Sidebar */}
+          <aside className="w-full lg:w-64 flex-shrink-0 animate-fade-up">
+            <div className="sticky top-32 space-y-10">
               <div>
-                <div className="flex items-center gap-2 text-white/80 font-medium mb-4 uppercase tracking-wider text-sm">
-                  <Filter className="w-4 h-4" />
+                <div className="text-travio-black font-body font-bold mb-6 uppercase tracking-widest text-[13px]">
                   Category
                 </div>
                 <div className="flex flex-col gap-2">
@@ -50,122 +45,73 @@ export default function ProductsPage() {
                     <button
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className={`text-left px-4 py-2 rounded-lg transition-colors ${
+                      className={`text-left px-4 py-3 border transition-all text-[13px] font-body font-medium uppercase tracking-wider ${
                         selectedCategory === category 
-                          ? 'bg-[#2D5A27] text-white' 
-                          : 'text-white/60 hover:bg-white/5 hover:text-white'
+                          ? 'bg-travio-black text-white border-travio-black' 
+                          : 'bg-white text-travio-mid border-travio-subtle hover:border-travio-mid hover:text-travio-black'
                       }`}
+                      style={{ borderRadius: '2px' }}
                     >
                       {category}
                     </button>
                   ))}
                 </div>
               </div>
+
+              <div className="p-6 bg-travio-off-white border border-travio-subtle" style={{ borderRadius: '2px' }}>
+                <Shield className="w-8 h-8 text-travio-accent mb-4" />
+                <h4 className="font-display font-bold text-xl mb-2 uppercase">UK Supported</h4>
+                <p className="text-sm font-body text-travio-mid">
+                  All hardware is designed, tested, and shipped from the UK.
+                </p>
+              </div>
             </div>
           </aside>
 
           {/* Product Grid */}
-          <div className="flex-1">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="flex-1 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filteredProducts.map((product) => (
-                <div key={product.id} className="group bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-[#2D5A27]/50 transition-colors flex flex-col h-full relative overflow-hidden">
-                  {product.stockStatus === 'Low Stock' && (
-                    <div className="absolute top-4 right-4 bg-orange-500/20 text-orange-400 text-xs font-semibold px-3 py-1 rounded-full border border-orange-500/30">
-                      Low Stock
-                    </div>
-                  )}
-                  {product.stockStatus === 'Pre-order' && (
-                    <div className="absolute top-4 right-4 bg-blue-500/20 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/30">
-                      Pre-order
+                <div key={product.id} className="group bg-white border border-travio-subtle p-8 hover:border-travio-black transition-all flex flex-col h-full relative" style={{ borderRadius: '2px' }}>
+                  {product.badge && (
+                    <div className="absolute top-6 left-6 z-10 flex gap-2">
+                       <span className={`text-[10px] font-body font-bold px-2 py-1 uppercase tracking-widest ${product.isBestSeller ? 'bg-travio-accent text-white' : 'bg-travio-black text-white'}`} style={{ borderRadius: '2px' }}>
+                        {product.badge}
+                      </span>
                     </div>
                   )}
                   
-                  <div className="aspect-video relative mb-6 bg-black/50 rounded-xl overflow-hidden flex items-center justify-center p-4">
-                    <Image 
-                      src={product.image} 
-                      alt={product.name}
-                      width={400}
-                      height={300}
-                      className="object-contain h-full w-auto mix-blend-screen group-hover:scale-105 transition-transform duration-500"
-                    />
+                  <div className="aspect-square relative mb-8 bg-travio-off-white flex items-center justify-center p-12 transition-all group-hover:scale-[1.02]">
+                    {/* Placeholder Silhouette */}
+                    <div className="w-32 h-24 bg-travio-charcoal/5 border border-travio-charcoal/10 relative"></div>
                   </div>
                   
                   <div className="mb-2">
-                    <span className="text-xs font-medium uppercase tracking-wider text-[#2D5A27]">
+                    <span className="text-[11px] font-body font-bold uppercase tracking-[0.15em] text-travio-accent">
                       {product.category}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-light mb-2">{product.name}</h3>
-                  <p className="text-white/60 text-sm mb-6 flex-grow">{product.tagline}</p>
+                  <h3 className="text-3xl font-display font-black mb-3 uppercase">{product.name}</h3>
+                  <p className="text-travio-mid text-[15px] font-body mb-8 flex-grow leading-relaxed">{product.tagline}</p>
                   
-                  <div className="flex flex-col gap-3 mt-auto">
+                  <div className="pt-6 border-t border-travio-subtle mt-auto flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-2xl font-body font-semibold text-travio-black">£{product.price.toFixed(2)}</span>
+                      <span className="text-[12px] font-body text-travio-mid uppercase">from {product.subscriptionFrom}</span>
+                    </div>
                     <Link 
                       href={`/products/${product.id}`}
-                      className="flex items-center justify-center gap-2 w-full bg-white text-black py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                      className="bg-travio-accent hover:bg-travio-accent-dk text-white px-6 py-3 text-[13px] font-body font-bold uppercase tracking-widest transition-all"
+                      style={{ borderRadius: '2px' }}
                     >
                       View Details
                     </Link>
-                    <button 
-                      onClick={() => toggleCompare(product)}
-                      className={`flex items-center justify-center gap-2 w-full py-3 rounded-lg font-medium border transition-colors ${
-                        compareList.find(p => p.id === product.id)
-                          ? 'bg-[#2D5A27]/20 border-[#2D5A27] text-[#2D5A27]'
-                          : 'border-white/10 hover:border-white/30 text-white/80'
-                      }`}
-                    >
-                      <SlidersHorizontal className="w-4 h-4" />
-                      {compareList.find(p => p.id === product.id) ? 'Added to Compare' : 'Compare'}
-                    </button>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
-
-        {/* Comparison Engine Floating Bar */}
-        {compareList.length > 0 && (
-          <div className="fixed bottom-0 left-0 right-0 bg-[#111111] border-t border-[#2D5A27] p-4 z-50 animate-in slide-in-from-bottom-full duration-300">
-            <div className="container mx-auto max-w-7xl flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-4 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
-                {compareList.map(p => (
-                  <div key={p.id} className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-lg p-2 min-w-[200px] flex-shrink-0">
-                    <div className="w-12 h-12 relative bg-black/50 rounded flex-shrink-0 flex items-center justify-center">
-                      <Image src={p.image} alt={p.name} width={40} height={40} className="object-contain mix-blend-screen" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">{p.name}</p>
-                      <button onClick={() => toggleCompare(p)} className="text-xs text-red-400 hover:text-red-300">Remove</button>
-                    </div>
-                  </div>
-                ))}
-                {[...Array(Math.max(0, 3 - compareList.length))].map((_, i) => (
-                  <div key={i} className="flex items-center gap-3 border border-dashed border-white/20 rounded-lg p-2 min-w-[200px] h-[66px] flex-shrink-0 opacity-50">
-                    <div className="w-12 h-12 bg-white/5 rounded flex-shrink-0"></div>
-                    <div className="flex-1">
-                      <div className="h-3 w-20 bg-white/10 rounded mb-1"></div>
-                      <div className="h-2 w-12 bg-white/10 rounded"></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="flex items-center gap-4 w-full md:w-auto">
-                <button 
-                  onClick={() => setCompareList([])}
-                  className="text-sm text-white/60 hover:text-white"
-                >
-                  Clear All
-                </button>
-                <Link 
-                  href={`/compare?ids=${compareList.map(p => p.id).join(',')}`}
-                  className="bg-[#2D5A27] hover:bg-[#23471f] text-white px-6 py-3 rounded-lg font-medium transition-colors flex-shrink-0"
-                >
-                  Compare {compareList.length} Items
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

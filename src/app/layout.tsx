@@ -4,14 +4,14 @@ import "./globals.css";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500"],
+  weight: ["400", "500"],
   variable: "--font-dm-sans",
   display: "swap",
 });
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["200", "300", "700", "800", "900"],
+  weight: ["800", "900"],
   variable: "--font-barlow-condensed",
   display: "swap",
 });
@@ -23,19 +23,19 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://traviogps.com"),
 };
 
+import { CartProvider } from "@/context/CartContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${barlowCondensed.variable}`}>
-      <body style={{ 
-        fontFamily: "var(--font-dm-sans)", 
-        backgroundColor: "var(--colour-white)",
-        color: "var(--colour-black)"
-      }}>
-        {children}
+    <html lang="en" className={`${dmSans.variable} ${barlowCondensed.variable} antialiased`}>
+      <body className="bg-travio-black text-white font-body selection:bg-travio-accent/30">
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

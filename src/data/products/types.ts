@@ -22,40 +22,58 @@ export interface InstallationMethod {
   toolsNeeded?: string[];
 }
 
-export interface SubscriptionCompatibility {
-  planId: string;
-  features: string[];
+export interface SubscriptionPlan {
+  name: string;
+  duration: string;
+  price: string;
+  isPopular?: boolean;
+}
+
+export interface InTheBoxItem {
+  name: string;
+  quantity: string;
+  icon?: string;
+}
+
+export interface ProductStat {
+  value: string;
+  label: string;
 }
 
 export interface Product {
   id: string;
+  slug: string;
   name: string;
   tagline: string;
   category: 'Hardwired' | 'Wireless' | 'Battery Terminal' | 'Plug & Play' | 'Dash Cam' | 'Sensor' | 'Accessory';
+  badge?: string;
+  isBestSeller?: boolean;
   price: number;
+  priceIncVat: number;
   subscriptionFrom: string;
   description: string;
   longDescription?: string;
   features: string[];
   specs: {
+    connectivity?: ProductSpec[];
     gnss?: ProductSpec[];
-    cellular?: ProductSpec[];
     power?: ProductSpec[];
-    interface?: ProductSpec[];
     physical?: ProductSpec[];
-    camera?: ProductSpec[]; // For dash cams
-    sensor?: ProductSpec[]; // For sensors
+    features?: ProductSpec[];
+    certifications?: ProductSpec[];
+    inTheBox?: ProductSpec[];
+    [key: string]: ProductSpec[] | undefined;
   };
   compat: string[];
   image: string;
   gallery?: string[];
-  
-  // New Enhanced Fields
   stockStatus: 'In Stock' | 'Low Stock' | 'Out of Stock' | 'Pre-order';
   simDetails?: string;
   faqs?: FAQ[];
   downloads?: Download[];
   installationMethods?: InstallationMethod[];
-  compatibleSubscriptions?: SubscriptionCompatibility[];
-  relatedProducts?: string[]; // IDs of related products
+  subscriptionPlans?: SubscriptionPlan[];
+  inTheBox?: InTheBoxItem[];
+  stats?: ProductStat[];
+  relatedProducts?: string[]; 
 }

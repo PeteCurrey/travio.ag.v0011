@@ -17,10 +17,10 @@ const Footer = () => {
           <div className="footer-grid">
             <div className="footer-column">
               <h4>Products</h4>
-              <Link href="/shop/hardwired">Hardwired Trackers</Link>
-              <Link href="/shop/obd">OBD Trackers</Link>
-              <Link href="/shop/battery">Battery Trackers</Link>
-              <Link href="/shop/insurance">Insurance Trackers</Link>
+              <Link href="/shop?category=HARDWIRED">Hardwired Trackers</Link>
+              <Link href="/shop?category=WIRELESS">Wireless Trackers</Link>
+              <Link href="/shop?category=BATTERY%20TERMINAL">Battery Trackers</Link>
+              <Link href="/shop?category=PLUG%20&%20PLAY">Plug & Play</Link>
               <Link href="/shop">All Products</Link>
             </div>
             <div className="footer-column">

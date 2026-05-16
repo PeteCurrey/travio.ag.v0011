@@ -1,259 +1,309 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'next/navigation';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import ProductCard from '@/components/ui/ProductCard';
 import { products } from '@/data/products';
+import { solutions } from '@/data/solutions';
+import { 
+  Check, 
+  ChevronDown, 
+  ChevronUp, 
+  Plus, 
+  Minus,
+  Quote,
+  Shield,
+  Clock,
+  Settings,
+  Tool
+} from 'lucide-react';
 import './SolutionPage.css';
 
-interface Solution {
-  name: string;
-  heroImage: string;
-  headline: string;
-  subcopy: string;
-  primaryProductId: string;
-  secondaryProductId?: string;
-  stats: { label: string; value: string }[];
-  painPoints: { title: string; desc: string }[];
-}
-
-const solutionData: Record<string, Solution> = {
-  car: {
-    name: 'Car',
-    heroImage: '/vehicles/car.png',
-    headline: 'Every car. Protected.',
-    subcopy: 'Professional-grade protection for your pride and joy. Real-time tracking and instant alerts for complete peace of mind.',
-    primaryProductId: 'one',
-    secondaryProductId: 'plug',
-    stats: [
-      { label: 'Cars stolen annually', value: '1 in 50' },
-      { label: 'Alert delivery time', value: '< 30 sec' },
-      { label: 'Network uptime', value: '99.9%' },
-      { label: 'Journey history', value: '90 days' },
-    ],
-    painPoints: [
-      { title: 'High theft rates', desc: 'Luxury and performance cars are prime targets for organized theft gangs.' },
-      { title: 'Keyless relay theft', desc: 'Protect against the latest high-tech theft methods with motion alerts.' },
-      { title: 'Insurance requirements', desc: 'Many insurers now require a certified GPS tracker for premium vehicles.' },
-    ]
-  },
-  van: {
-    name: 'Van',
-    heroImage: '/vehicles/van.png',
-    headline: 'Every van. Secured.',
-    subcopy: 'Protect your livelihood. Stop tool theft and vehicle loss with the UK’s most reliable van tracking solutions.',
-    primaryProductId: 'pro',
-    secondaryProductId: 'one',
-    stats: [
-      { label: 'Avg theft loss', value: '£6,500' },
-      { label: 'Alert delivery time', value: '< 30 sec' },
-      { label: 'Network uptime', value: '99.9%' },
-      { label: 'Journey history', value: '90 days' },
-    ],
-    painPoints: [
-      { title: 'Tool theft protection', desc: 'Get notified the moment your van is tampered with or moved.' },
-      { title: 'Fleet management', desc: 'Track multiple vans on one account with detailed driver behaviour reports.' },
-      { title: 'Business continuity', desc: 'Minimize downtime with real-time location data for your entire team.' },
-    ]
-  },
-  motorhome: {
-    name: 'Motorhome',
-    heroImage: '/vehicles/motorhome.png',
-    headline: 'Every motorhome. Tracked.',
-    subcopy: 'Adventure without anxiety. Keep your motorhome safe in storage or on the road with specialized GPS tracking.',
-    primaryProductId: 'silent',
-    secondaryProductId: 'pro',
-    stats: [
-      { label: 'Motorhomes stolen', value: '1,200+' },
-      { label: 'Recovery rate', value: '94%' },
-      { label: 'Battery life', value: '3 Years' },
-      { label: 'Network', value: 'Global 4G' },
-    ],
-    painPoints: [
-      { title: 'Off-site storage', desc: 'Monitor your motorhome even when it is stored miles away with zero power source.' },
-      { title: 'Journey tracking', desc: 'Share your adventures and keep a digital log of every trip you take.' },
-      { title: 'Signal detection protection', desc: 'Our Silent range is invisible to scanners used by professional thieves.' },
-    ]
-  },
-  motorbike: {
-    name: 'Motorbike',
-    heroImage: '/vehicles/motorbike.png',
-    headline: 'Every bike. Safe.',
-    subcopy: 'The ultimate motorcycle security. Waterproof, compact, and featuring built-in crash detection for riders.',
-    primaryProductId: 'volt',
-    secondaryProductId: 'one',
-    stats: [
-      { label: 'Bikes stolen daily', value: '100+' },
-      { label: 'Crash alert time', value: 'Instant' },
-      { label: 'Waterproof rating', value: 'IP65' },
-      { label: 'Install time', value: '2 Mins' },
-    ],
-    painPoints: [
-      { title: 'Rider safety', desc: 'Automatic crash detection sends an alert to your emergency contacts if you go down.' },
-      { title: 'Small form factor', desc: 'Tiny devices designed to be hidden under seats or behind fairings.' },
-      { title: 'Low battery draw', desc: 'Engineered specifically for smaller motorcycle batteries to prevent drainage.' },
-    ]
-  },
-  caravan: {
-    name: 'Caravan',
-    heroImage: '/vehicles/caravan.png',
-    headline: 'Every caravan. Guarded.',
-    subcopy: 'Long-term battery protection for non-powered assets. Magnetic mount, waterproof, and zero maintenance.',
-    primaryProductId: 'silent',
-    stats: [
-      { label: 'Caravans stolen', value: '4,000+' },
-      { label: 'Battery life', value: '3 Years' },
-      { label: 'Install time', value: '5 Secs' },
-      { label: 'Protection', value: 'IP68' },
-    ],
-    painPoints: [
-      { title: 'Zero power access', desc: 'Designed for assets without their own battery. No wiring needed.' },
-      { title: 'Magnetic mounting', desc: 'Clicks onto any metal chassis member in seconds. Hide it anywhere.' },
-      { title: 'Tamper alerts', desc: 'Get a notification the moment the device is disturbed or moved.' },
-    ]
-  },
-  'plant-equipment': {
-    name: 'Plant & Equipment',
-    heroImage: '/vehicles/digger.jpg',
-    headline: 'Every machine. Controlled.',
-    subcopy: 'Ruggedized tracking for the construction industry. IP68 waterproof, shock-resistant, and engine-hour monitoring.',
-    primaryProductId: 'silent',
-    secondaryProductId: 'pro',
-    stats: [
-      { label: 'Industry loss', value: '£800m' },
-      { label: 'Downtime cost', value: 'High' },
-      { label: 'Protection', value: 'IP68' },
-      { label: 'Updates', value: 'FOTA' },
-    ],
-    painPoints: [
-      { title: 'Theft on site', desc: 'Protect expensive machinery in vulnerable or remote locations.' },
-      { title: 'Engine hour monitoring', desc: 'Keep track of actual machine usage for maintenance and billing.' },
-      { title: 'Harsh environments', desc: 'Built to survive mud, pressure washing, and heavy vibration.' },
-    ]
-  }
-};
-
-const SolutionPage = ({ params }: { params: { slug: string } }) => {
-  const data = solutionData[params.slug] || solutionData.car;
+const SolutionPage = () => {
+  const { slug } = useParams();
+  const data = solutions[slug as string] || solutions.car;
   
-  const primaryProduct = products.find(p => p.id === data.primaryProductId);
-  const secondaryProduct = data.secondaryProductId ? products.find(p => p.id === data.secondaryProductId) : null;
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const primaryProduct = products.find(p => p.id === data.recommendations.primaryId);
+  const secondaryProduct = data.recommendations.secondaryId ? products.find(p => p.id === data.recommendations.secondaryId) : null;
 
   return (
-    <main className="solution-page">
+    <main className="min-h-screen bg-white text-travio-black">
       <Navbar />
 
-      {/* Hero */}
-      <section className="solution-hero">
-        <div className="hero-bg" style={{ backgroundImage: `url(${data.heroImage})` }}>
-          <div className="hero-overlay" />
+      {/* COMPONENT 1: HERO */}
+      <section className="relative h-screen flex items-center overflow-hidden">
+        {/* Parallax Background Placeholder */}
+        <div className="absolute inset-0 bg-travio-black">
+           <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+           <div className="absolute inset-0 bg-gradient-to-r from-travio-black via-travio-black/80 to-transparent"></div>
         </div>
-        <div className="container hero-content">
-          <span className="eyebrow small-label">{data.name} GPS TRACKING</span>
-          <h1>{data.headline}</h1>
-          <p>{data.subcopy}</p>
-          <div className="hero-cta">
-            <button className="btn btn-primary" onClick={() => document.getElementById('recommendations')?.scrollIntoView({ behavior: 'smooth' })}>
-              View Recommendations
-            </button>
-            <button className="btn btn-white-border">How it works</button>
+
+        <div className="container relative z-10 animate-fade-up">
+          <div className="max-w-2xl">
+            <span className="text-travio-accent text-[12px] font-body font-medium tracking-[0.16em] uppercase mb-6 block">
+              {data.hero.eyebrow}
+            </span>
+            <h1 className="text-white text-[72px] md:text-[96px] font-display font-black leading-[0.92] uppercase mb-6">
+              {data.hero.headline}
+            </h1>
+            <p className="text-white/70 text-[18px] font-body max-w-[500px] mb-10 leading-relaxed">
+              {data.hero.subcopy}
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <button className="bg-travio-accent hover:bg-travio-accent-dk text-white h-[48px] px-8 text-[14px] font-body font-bold uppercase tracking-[0.05em] transition-all rounded-[2px]">
+                {data.hero.cta}
+              </button>
+              <button className="bg-transparent border border-white text-white hover:bg-white/10 h-[48px] px-8 text-[14px] font-body font-bold uppercase tracking-[0.05em] transition-all rounded-[2px]">
+                How it works
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why Section */}
-      <section className="why-section section">
-        <div className="container why-grid">
-          <div className="why-content">
-            <span className="small-label">Why Travio?</span>
-            <h2>Why {data.name} owners need tracking</h2>
-            <div className="pain-points">
-              {data.painPoints.map((point: any, i: number) => (
-                <div key={i} className="point">
-                  <h3>{point.title}</h3>
-                  <p>{point.desc}</p>
+      {/* COMPONENT 2: WHY [VEHICLE TYPE] OWNERS NEED TRACKING */}
+      <section className="py-24 bg-white">
+        <div className="container grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-7 animate-fade-up">
+            <h2 className="text-[42px] md:text-[52px] font-display font-black text-travio-black leading-tight uppercase mb-12">
+              {data.problem.headline}
+            </h2>
+            <div className="space-y-10">
+              {data.problem.painPoints.map((point, i) => (
+                <div key={i} className="space-y-2">
+                  <h3 className="text-[14px] font-body font-bold text-travio-black uppercase tracking-wider">
+                    {point.title}
+                  </h3>
+                  <p className="text-[15px] font-body text-travio-mid leading-relaxed max-w-[540px]">
+                    {point.description}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="why-image">
-             <img src={data.heroImage} alt={data.name} className="reveal in-view" />
-          </div>
-        </div>
-      </section>
-
-      {/* Stat Strip */}
-      <section className="stat-strip">
-        <div className="container stat-grid">
-          {data.stats.map((stat: any, i: number) => (
-            <div key={i} className="stat-item">
-              <span className="stat-value">{stat.value}</span>
-              <span className="stat-label">{stat.label}</span>
+          <div className="lg:col-span-5 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+            <div className="bg-travio-off-white p-12 border border-travio-subtle space-y-12">
+              {data.problem.stats.map((stat, i) => (
+                <div key={i} className="pb-8 border-b border-travio-subtle last:border-0 last:pb-0">
+                  <div className="text-[64px] font-display font-black text-travio-black leading-none uppercase mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-[14px] font-body text-travio-mid uppercase tracking-wide">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* Recommendations */}
-      <section id="recommendations" className="recommendations-section section">
+      {/* COMPONENT 3: STAT STRIP */}
+      <section className="bg-travio-black py-20">
         <div className="container">
-          <div className="section-header centered">
-            <span className="small-label">Expert Picks</span>
-            <h2>Recommended for your {data.name}</h2>
-            <p>Based on {data.name}-specific theft patterns and power requirements, we recommend these trackers.</p>
-          </div>
-
-          <div className="recommendations-grid">
-            {primaryProduct && (
-              <div className="rec-card primary">
-                <div className="rec-badge">PRIMARY CHOICE</div>
-                <ProductCard product={primaryProduct} />
-                <div className="rec-reason">
-                  <h4>Why we recommend this:</h4>
-                  <p>{getRecommendationReason(data.name, primaryProduct.id)}</p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0">
+            {data.darkStats.map((stat, i) => (
+              <div key={i} className="text-center px-4 lg:border-r border-white/10 last:border-0">
+                <div className="text-[32px] md:text-[48px] font-display font-black text-white leading-none uppercase mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-[12px] font-body text-white/50 uppercase tracking-widest leading-tight">
+                  {stat.label}
                 </div>
               </div>
-            )}
-            {secondaryProduct && (
-              <div className="rec-card secondary">
-                <div className="rec-badge">SECONDARY OPTION</div>
-                <ProductCard product={secondaryProduct} />
-                <div className="rec-reason">
-                  <h4>Why we recommend this:</h4>
-                  <p>{getRecommendationReason(data.name, secondaryProduct.id)}</p>
-                </div>
-              </div>
-            )}
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Case Study */}
-      <section className="case-study section">
-        <div className="container centered">
-          <svg className="quote-icon" width="80" height="80" viewBox="0 0 24 24" fill="var(--colour-accent)" opacity="0.1">
-            <path d="M3 21h3l2-4H5V7H11V21h3l2-4h-3V7h6V21h3l2-4h-3V7h3V3H3v18z" />
-          </svg>
-          <blockquote className="quote">
-            "My {data.name.toLowerCase()} was taken from my driveway at 3am. I had a location on my phone within 45 seconds. Police recovered it in 20 minutes."
-          </blockquote>
-          <cite className="attribution">Real Travio Customer, United Kingdom</cite>
+      {/* COMPONENT 4: RECOMMENDED PRODUCTS */}
+      <section className="py-24 bg-travio-off-white">
+        <div className="container">
+          <div className="mb-16 animate-fade-up">
+            <span className="text-travio-accent text-[12px] font-body font-medium tracking-[0.16em] uppercase mb-4 block">
+              MATCHED TO YOUR VEHICLE
+            </span>
+            <h2 className="text-[48px] font-display font-black text-travio-black leading-[1] uppercase">
+              RECOMMENDED FOR {data.name}S
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {[primaryProduct, secondaryProduct].filter(Boolean).map((product, i) => (
+              <div key={product?.id} className="group bg-white border border-travio-subtle p-0 transition-all hover:border-travio-black flex flex-col h-full relative" style={{ borderRadius: '2px' }}>
+                <div className="bg-travio-accent text-white text-[12px] font-body font-medium uppercase tracking-widest py-3 px-6 text-center">
+                  {i === 0 ? data.recommendations.primaryBadge : data.recommendations.secondaryBadge || 'SECONDARY OPTION'}
+                </div>
+                
+                <div className="p-8 flex flex-col h-full">
+                  <div className="aspect-square relative mb-8 bg-travio-off-white flex items-center justify-center p-12 transition-all group-hover:scale-[1.02]">
+                    <div className="w-32 h-24 bg-travio-charcoal/5 border border-travio-charcoal/10 relative"></div>
+                  </div>
+                  
+                  <div className="mb-2">
+                    <span className="text-[11px] font-body font-bold uppercase tracking-[0.15em] text-travio-accent">
+                      {product?.category}
+                    </span>
+                  </div>
+                  <h3 className="text-3xl font-display font-black mb-3 uppercase">{product?.name}</h3>
+                  <p className="text-travio-mid text-[15px] font-body mb-8 flex-grow leading-relaxed">{product?.tagline}</p>
+                  
+                  <div className="pt-6 border-t border-travio-subtle mt-auto flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-2xl font-body font-semibold text-travio-black">£{product?.price.toFixed(2)}</span>
+                      <span className="text-[12px] font-body text-travio-mid uppercase">from {product?.subscriptionFrom}</span>
+                    </div>
+                    <a 
+                      href={`/products/${product?.id}`}
+                      className="bg-travio-black hover:bg-travio-charcoal text-white px-8 py-3 text-[13px] font-body font-bold uppercase tracking-widest transition-all"
+                      style={{ borderRadius: '2px' }}
+                    >
+                      View Details
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center animate-fade-up">
+            <a href="/products" className="text-travio-accent text-[14px] font-body font-bold uppercase tracking-[0.06em] hover:underline">
+              VIEW ALL PRODUCTS →
+            </a>
+          </div>
         </div>
+      </section>
+
+      {/* COMPONENT 5: CUSTOMER STORY */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="container relative z-10 text-center max-w-4xl animate-fade-up">
+           <Quote size={100} className="text-travio-subtle opacity-30 mx-auto mb-8" />
+           <blockquote className="text-[28px] md:text-[32px] font-display font-bold italic text-travio-black leading-tight mb-8">
+            &quot;{data.customerStory.quote}&quot;
+           </blockquote>
+           <cite className="block text-[16px] font-body text-travio-mid not-italic uppercase tracking-widest mb-16">
+            — {data.customerStory.attribution}
+           </cite>
+
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+             {data.customerStory.outcomes.map((outcome, i) => (
+               <div key={i} className="space-y-1">
+                 <div className="text-[28px] font-display font-black text-travio-accent uppercase">
+                   {outcome.value}
+                 </div>
+                 <div className="text-[14px] font-body text-travio-mid uppercase tracking-wide">
+                   {outcome.label}
+                 </div>
+               </div>
+             ))}
+           </div>
+        </div>
+      </section>
+
+      {/* COMPONENT 6: INSTALLATION OPTIONS */}
+      <section className="py-24 bg-travio-off-white">
+        <div className="container">
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+             <div className="bg-white border border-travio-subtle p-10 space-y-6" style={{ borderRadius: '2px' }}>
+                <div className="w-12 h-12 flex items-center justify-center bg-travio-off-white text-travio-accent">
+                   <Settings size={24} />
+                </div>
+                <h3 className="text-[24px] font-display font-black text-travio-black uppercase tracking-tight">Self-Install</h3>
+                <p className="text-[15px] font-body text-travio-mid leading-relaxed">
+                  Most customers are up and running in 20-30 minutes with our included guide and video walkthrough.
+                </p>
+                <a href="/installation" className="inline-block text-travio-accent text-[14px] font-body font-bold uppercase tracking-widest hover:underline">
+                  View Guides →
+                </a>
+             </div>
+
+             <div className="bg-white border border-travio-subtle p-10 space-y-6" style={{ borderRadius: '2px' }}>
+                <div className="w-12 h-12 flex items-center justify-center bg-travio-off-white text-travio-accent">
+                   <Shield size={24} />
+                </div>
+                <h3 className="text-[24px] font-display font-black text-travio-black uppercase tracking-tight">Professional</h3>
+                <p className="text-[15px] font-body text-travio-mid leading-relaxed">
+                  Our nationwide network of certified technicians comes to your door, 7 days a week, across the UK.
+                </p>
+                <button className="text-travio-accent text-[14px] font-body font-bold uppercase tracking-widest hover:underline">
+                  Book Fitment →
+                </button>
+             </div>
+
+             <div className="bg-white border border-travio-subtle p-10 space-y-6" style={{ borderRadius: '2px' }}>
+                <div className="w-12 h-12 flex items-center justify-center bg-travio-off-white text-travio-accent">
+                   <Clock size={24} />
+                </div>
+                <h3 className="text-[24px] font-display font-black text-travio-black uppercase tracking-tight">Rapid Tracking</h3>
+                <p className="text-[15px] font-body text-travio-mid leading-relaxed">
+                  Need protection today? Choose the Travio PLUG for 30-second setup with zero tools required.
+                </p>
+                <a href="/products/plug" className="inline-block text-travio-accent text-[14px] font-body font-bold uppercase tracking-widest hover:underline">
+                  See Plug & Play →
+                </a>
+             </div>
+           </div>
+        </div>
+      </section>
+
+      {/* COMPONENT 7: FAQ — VEHICLE SPECIFIC */}
+      <section className="py-24 bg-white">
+        <div className="container max-w-3xl">
+           <div className="text-center mb-16">
+             <span className="text-travio-accent text-[12px] font-body font-medium tracking-[0.16em] uppercase mb-4 block">
+                QUESTIONS
+             </span>
+             <h2 className="text-[48px] font-display font-black text-travio-black uppercase">FAQ</h2>
+           </div>
+           
+           <div className="space-y-4">
+             {data.faqs.map((faq, i) => (
+               <div key={i} className="border-b border-travio-subtle last:border-0">
+                 <button 
+                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                   className="w-full flex items-center justify-between py-6 text-left"
+                 >
+                   <span className="text-[15px] font-body font-medium text-travio-black uppercase tracking-tight">
+                     {faq.question}
+                   </span>
+                   <div className={`transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}>
+                     {openFaq === i ? <Minus size={18} className="text-travio-mid" /> : <Plus size={18} className="text-travio-mid" />}
+                   </div>
+                 </button>
+                 <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openFaq === i ? 'max-h-96 pb-8' : 'max-h-0'}`}>
+                   <p className="text-[15px] font-body text-travio-mid max-w-[720px] leading-relaxed">
+                     {faq.answer}
+                   </p>
+                 </div>
+               </div>
+             ))}
+           </div>
+        </div>
+      </section>
+
+      {/* COMPONENT 8: PRE-FOOTER CTA */}
+      <section className="bg-travio-accent py-24">
+         <div className="container text-center">
+            <h2 className="text-white text-[48px] md:text-[64px] font-display font-black uppercase mb-10 leading-[1]">
+              PROTECT YOUR {data.name} TODAY.
+            </h2>
+            <div className="flex flex-wrap justify-center gap-4">
+              <button className="bg-white text-travio-accent hover:bg-travio-off-white h-[48px] px-10 text-[14px] font-body font-bold uppercase tracking-widest transition-all rounded-[2px]">
+                Shop Trackers
+              </button>
+              <button className="bg-transparent border border-white text-white hover:bg-white/10 h-[48px] px-10 text-[14px] font-body font-bold uppercase tracking-widest transition-all rounded-[2px]">
+                Contact Expert
+              </button>
+            </div>
+         </div>
       </section>
 
       <Footer />
     </main>
   );
 };
-
-function getRecommendationReason(vehicle: string, productId: string): string {
-  if (productId === 'one') return 'The ONE is the perfect balance of compact size and full 4G connectivity. It fits invisibly into any vehicle.';
-  if (productId === 'pro') return 'Professional-grade tracking with advanced analytics. Best for high-value assets and business usage.';
-  if (productId === 'silent') return 'The silent range is invisible to thieves\' scanners and offers 3 years of battery life for non-powered assets.';
-  if (productId === 'volt') return 'Specifically designed for motorcycle batteries with gyroscope crash detection and IP65 waterproofing.';
-  if (productId === 'plug') return 'The easiest entry into tracking. No tools, no wiring, just plug and go.';
-  return '';
-}
 
 export default SolutionPage;
