@@ -3,10 +3,12 @@ import { Product } from './types';
 export const dashcams: Product[] = [
   {
     id: 'dash-pro',
+    slug: 'dash-pro',
     name: 'Travio Vision PRO',
     tagline: 'Dual-lens AI dash cam with live remote viewing.',
     category: 'Dash Cam',
     price: 249,
+    priceIncVat: 298.80,
     subscriptionFrom: '£9.99/mo',
     description: 'A professional-grade 4G dash cam featuring a road-facing 1080p lens and an inward-facing AI cabin camera. Instantly uploads crash footage to the cloud and allows fleet managers to view live video remotely.',
     features: [

@@ -16,7 +16,9 @@ import {
   History,
   Users,
   BarChart3,
-  ArrowRight
+  ArrowRight,
+  HardDrive,
+  Shield
 } from 'lucide-react';
 
 const HowItWorksPage = () => {

@@ -3,10 +3,12 @@ import { Product } from './types';
 export const sensors: Product[] = [
   {
     id: 'sensor-temp',
+    slug: 'sensor-temp',
     name: 'Travio BLE Temperature Sensor',
     tagline: 'Wireless temperature monitoring for cold chain logistics.',
     category: 'Sensor',
     price: 35,
+    priceIncVat: 42,
     subscriptionFrom: '£1.00/mo',
     description: 'A rugged Bluetooth Low Energy (BLE) sensor that broadcasts ambient temperature data to a compatible Travio tracker. Ideal for refrigerated vans and pharmaceutical transport.',
     features: [

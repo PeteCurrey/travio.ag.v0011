@@ -15,8 +15,7 @@ import {
   Quote,
   Shield,
   Clock,
-  Settings,
-  Tool
+  Settings
 } from 'lucide-react';
 import './SolutionPage.css';
 

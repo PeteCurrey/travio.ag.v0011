@@ -12,7 +12,6 @@ import {
   FileText,
   MapPin,
   Calendar,
-  Tool,
   Clock
 } from 'lucide-react';
 
